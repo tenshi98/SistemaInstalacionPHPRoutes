@@ -108,14 +108,13 @@ Sistema completo de instalación con asistente paso a paso para configurar bases
 ### 1. Clonar o Descargar el Proyecto
 
 ```bash
-cd /mnt/Desarrollos/Entornos/docker_entorno_lamp/www/
-# El proyecto ya está en la carpeta 'instalador'
+git clone https://github.com/tenshi98/SistemaInstalacionPHPRoutes.git
+cd SistemaInstalacionPHPRoutes
 ```
 
 ### 2. Verificar Permisos
 
 ```bash
-cd instalador
 chmod 755 config logs
 chmod 644 config/settings.php
 ```
@@ -147,27 +146,13 @@ sudo a2enmod rewrite
 sudo systemctl restart apache2
 ```
 
-Configuración de VirtualHost (opcional):
-
-```apache
-<VirtualHost *:80>
-    ServerName instalador.local
-    DocumentRoot /mnt/Desarrollos/Entornos/docker_entorno_lamp/www/instalador
-    
-    <Directory /mnt/Desarrollos/Entornos/docker_entorno_lamp/www/instalador>
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-```
-
 #### Nginx
 
 ```nginx
 server {
     listen 80;
     server_name instalador.local;
-    root /mnt/Desarrollos/Entornos/docker_entorno_lamp/www/instalador;
+    root /localhost/SistemaInstalacionPHPRoutes;
     index index.php;
 
     location / {
@@ -239,13 +224,13 @@ Reemplaza `sql/install.sql` con tu propio script SQL si es necesario. El archivo
 Abre tu navegador y navega a:
 
 ```
-http://localhost/instalador
+http://localhost/SistemaInstalacionPHPRoutes
 ```
 
 O si configuraste un VirtualHost:
 
 ```
-http://instalador.local
+http://SistemaInstalacionPHPRoutes.local
 ```
 
 ### 2. Seguir el Asistente
@@ -318,7 +303,7 @@ SELECT COUNT(*) FROM usuarios;
 
 ```bash
 # 1. Navegar al instalador
-http://localhost/instalador
+http://localhost/SistemaInstalacionPHPRoutes
 
 # 2. Completar el asistente con:
 Host: localhost
@@ -729,9 +714,3 @@ Para reportar problemas o sugerencias:
 2. Verificar los logs en `logs/`
 3. Consultar la sección de Solución de Problemas
 
----
-
-**Versión**: 1.0.0  
-**Última actualización**: 2026-01-29  
-**Licencia**: MIT  
-**Autor**: Sistema de Instalación PHP
